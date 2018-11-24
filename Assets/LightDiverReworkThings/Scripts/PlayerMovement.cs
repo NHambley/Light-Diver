@@ -48,6 +48,9 @@ Axes:
 
     Vector3 joystickPos;
     Vector3 position;
+
+    Rigidbody2D rb;
+    Vector2 velocity;
     
 
     void Start ()
@@ -56,6 +59,7 @@ Axes:
         moveSpeed = 5f;
         joystickPos = new Vector3(horizontal, vertical, 0);
         position = transform.position;
+        rb = GetComponent<Rigidbody2D>();
 	}
 	
 	// Update is called once per frame
@@ -75,14 +79,16 @@ Axes:
         joystickPos = new Vector3(horizontalL, verticalL, 0);
 
         CheckRotation();
+        velocity = new Vector2(horizontalL, verticalL);
         CheckMovement();
     }
 
     void CheckMovement()
     {
         // use joystick position as a movement vector
-        position += new Vector3(horizontalL, verticalL, 0) * moveSpeed * Time.deltaTime;
-        transform.position = position;
+        //position += new Vector3(horizontalL, verticalL, 0) * moveSpeed * Time.deltaTime;
+        //transform.position = position;
+        rb.MovePosition(rb.position + velocity * Time.fixedDeltaTime * moveSpeed);
     }
 
     void CheckRotation()
