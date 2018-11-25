@@ -14,6 +14,12 @@ public class CaveGenerationScript : MonoBehaviour
     [Range(0, 100)]
     public int randomFillPercent;
 
+    [SerializeField]
+    GameObject player;
+
+    [SerializeField]
+    List<List<Coord>> rooms;
+
     int[,] map;
 
     void Start()
@@ -418,6 +424,7 @@ public class CaveGenerationScript : MonoBehaviour
 
         return wallCount;
     }
+
 
     struct Coord
     {
